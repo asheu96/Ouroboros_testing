@@ -39,18 +39,18 @@ class List:
         except TypeError:
             print('Input list should be numbers')
             logging.debug('Given list does not contain summable elements')
-            return
+            return None
 
         if len(self.list) == 0:
-            raise ValueError('No elements in list to be summed')
             logging.warning('List contains no elements')
-            return
+            return None
             
         sum = 0
         for elem in self.list:
             sum += elem
         self.sum = sum
         logging.info('Elements have been successfully summed')
+        return self.sum
 
     def min_max(self):
 
@@ -61,18 +61,26 @@ class List:
         :raises ValueError: can not input a list with complex numbers
         """
         if np.iscomplexobj(self.list):
-            raise ValueError('Given list contains imaginary numbers')
+            #raise ValueError('Given list contains imaginary numbers')
             logging.warning('Given list contains imaginary numbers')
-            return
-
+            return None
+        
         try:
             np.max(self.list)
+        except ValueError:
+            logging.debug('List contains values of incorrect value')
         except TypeError:
             logging.debug('List contains values of incorrect type')
-            return
+            return None
+        
+        if len(self.list) <= 1:
+            #raise ValueError('Too little elements to find min and max')
+            logging.debug('Too little elements to find min and max')
+            return None
 
         self.minMax = ((np.max(self.list), np.min(self.list)))
         logging.info('Element min and max have been successfully found')
+        return self.minMax
 
     def max_diff(self):
 
@@ -91,25 +99,27 @@ class List:
         # Function
         if any(self.list) < 0:
             logging.warning('Negative values present in list')
-
-        try:
-            np.sum(self.list)
-        except TypeError:
-            print('Input list should be numbers')
-            logging.debug('Given list does not contain summable elements')
-            return
         
+        if (len(self.list) <= 1):
+            logging.warning('Not enough elements in list')
+            return None
+
         try:
             np.diff(self.list)
         except ValueError:
-            logging.error('ValueError: Add more numbers to list')
-            return
-
-
+            logging.error('ValueError, add more numbers to list')
+            print('Add more numbers to list')
+            return None
+                    
+        except TypeError:
+            print('Input list should be numbers')
+            logging.debug('Given list does not contain numbers')
+            return None
+       
         input_list = np.array(self.list)
         diffs = abs(np.diff(input_list))
         self.maxDiff = max(diffs)
         logging.info('Max difference successfully found')
-        return
+        return self.maxDiff
         
 
