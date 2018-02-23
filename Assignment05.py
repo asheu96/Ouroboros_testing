@@ -10,8 +10,17 @@ except ImportError:
 
 class List:
 
-    def __init__(self, my_list, sum = None, minMax = None, maxDiff = None):
+    """ Defines the List class
 
+    _init__ sets None values to sum, minMax and maxDiff
+    :Attributes: sum - contains the sum of the elements of the list
+    :Attributes: minMax - contains the minimum and maximum element of the given list in tuple format
+    :Attributes: maxDiff - contains the maximum different between adjacent elements
+    :Attributes: list - contains the given input list
+    """
+
+    def __init__(self, my_list, sum = None, minMax = None, maxDiff = None):
+        
         logging.basicConfig(filename='listLog.txt', level=logging.DEBUG, format='%(asctime)s %(levelname)s %(message)s', datefmt='%H:%M:%S')
         with open('listLog.txt', 'w'):
             pass
@@ -28,7 +37,7 @@ class List:
     def get_sum(self):
 
         """
-        :param my_list: list containing real numbers to be summed
+        :param: self - contains initial attribute of list
         :raises: TypeError if list cannot be summed
         :raises: ValueError if no elements in given list
         :returns: sum of all elements in the list
@@ -55,7 +64,7 @@ class List:
     def min_max(self):
 
         """ Function returns the max and min value of the input list
-        :param my_list: a list of numbers
+        :param: self - object contains initial input list
         :returns max_min: a tuple of the min and max values of given list
         :raises TypeError: can only input a list of numbers
         :raises ValueError: can not input a list with complex numbers
@@ -89,7 +98,7 @@ class List:
         adjacent values, takes the absolute values of the differences to disregard positioning, and then outputs the
         maximum value.
 
-        :param input_list: List of numbers
+        :param: self - contains attribute of initial given list
         :return: Maximum difference
         :raises ImportError: Check if numpy is installed or virtual env is established
         :raises TypeError: Input not given as a list of values
